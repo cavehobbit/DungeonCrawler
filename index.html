@@ -10,10 +10,13 @@
             padding: 0;
             box-sizing: border-box;
         }
+
+    
         
         body {
             background: #000;
             color: #fff;
+
             font-family: 'Courier New', monospace;
 
             display: flex;
@@ -24,6 +27,7 @@
         }
         
         #gameContainer {
+
             display: flex;
             flex-direction: column;
 
@@ -43,14 +47,11 @@
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
-
-
         }
         
         #canvasContainer {
             border: 3px solid #fff;
             box-shadow: 0 0 20px #fff;
-
             background: #000;
         }
         
@@ -58,16 +59,14 @@
             display: block;
             image-rendering: pixelated;
             image-rendering: crisp-edges;
-
-
         }
         
         #sidebar {
             flex: 1;
+
             min-width: 250px;
             display: flex;
             flex-direction: column;
-
             gap: 15px;
         }
         
@@ -76,7 +75,6 @@
             border: 2px solid #fff;
             padding: 15px;
             box-shadow: 0 0 10px #fff;
-
         }
         
         .panel h2 {
@@ -84,15 +82,13 @@
             margin-bottom: 10px;
             font-size: 16px;
             border-bottom: 1px solid #fff;
-
-
             padding-bottom: 5px;
         }
         
         .stat {
             display: flex;
-            justify-content: space-between;
 
+            justify-content: space-between;
             margin: 5px 0;
             font-size: 14px;
         }
@@ -110,10 +106,11 @@
         
         .bar-fill {
             height: 100%;
-
             background: #fff;
             transition: width 0.3s;
             box-shadow: 0 0 10px #fff;
+
+
         }
         
         .bar-fill.hp { background: #f00; box-shadow: 0 0 10px #f00; }
@@ -126,19 +123,19 @@
             color: #fff;
             font-size: 12px;
             text-shadow: 1px 1px #000;
+
         }
         
         #messageLog {
             height: 200px;
             overflow-y: auto;
-            font-size: 12px;
 
+            font-size: 12px;
             line-height: 1.4;
         }
         
         #messageLog::-webkit-scrollbar {
             width: 8px;
-
         }
         
         #messageLog::-webkit-scrollbar-track {
@@ -146,6 +143,7 @@
         }
         
         #messageLog::-webkit-scrollbar-thumb {
+
             background: #fff;
             border: 1px solid #333;
         }
@@ -157,6 +155,7 @@
         
         .message.damage { color: #f00; }
 
+
         .message.heal { color: #0ff; }
         .message.info { color: #ff0; }
         .message.death { color: #f0f; }
@@ -167,43 +166,46 @@
         }
         
         #controls kbd {
+
             background: #333;
             border: 1px solid #fff;
-
             padding: 2px 5px;
             border-radius: 3px;
             font-family: 'Courier New', monospace;
+
         }
         
         #gameOver {
+
             position: fixed;
             top: 50%;
             left: 50%;
-
             transform: translate(-50%, -50%);
             background: #000;
             border: 4px solid #f00;
             padding: 30px;
             text-align: center;
             box-shadow: 0 0 50px #f00;
+
             z-index: 1000;
             display: none;
         }
         
         #gameOver.show { display: block; }
-
         #gameOver.win { border-color: #fff; box-shadow: 0 0 50px #fff; }
         
         #gameOver h2 {
             font-size: 36px;
             color: #f00;
+
             margin-bottom: 20px;
             text-shadow: 3px 3px #000;
         }
-
         
         #gameOver.win h2 { color: #fff; }
         
+
+
         #gameOver button {
             background: #fff;
             color: #000;
@@ -217,60 +219,65 @@
             text-transform: uppercase;
             font-weight: bold;
         }
-
-
         
         #gameOver button:hover {
             background: #000;
             color: #fff;
         }
         
-
         .legend {
+
             font-size: 11px;
             line-height: 1.6;
             margin-top: 10px;
         }
-
-
         
         .legend-item {
             display: flex;
             align-items: center;
+
+
             gap: 10px;
         }
         
         .legend-char {
             font-weight: bold;
-
             font-size: 14px;
             width: 20px;
         }
     </style>
+
+
 </head>
 <body>
+
+
     <div id="gameContainer">
-        <div id="title">⚔ DUNGEON CRAWLER ⚔</div>
+        <div id="title"> DUNGEON CRAWLER </div>
+
         
         <div id="mainGame">
             <div id="canvasContainer">
-
                 <canvas id="gameCanvas"></canvas>
             </div>
             
+
+
             <div id="sidebar">
                 <div class="panel">
                     <h2>⚔ PLAYER STATS</h2>
                     <div class="stat">
-
                         <span>Level:</span>
+
                         <span id="level">1</span>
                     </div>
                     <div class="bar">
                         <div class="bar-fill hp" id="hpBar" style="width: 100%"></div>
+
                         <div class="bar-text" id="hpText">100/100</div>
                     </div>
                     <div class="stat">
+
                         <span>Attack:</span>
                         <span id="attack">5</span>
                     </div>
@@ -279,35 +286,35 @@
                         <span id="defense">2</span>
                     </div>
 
+
                     <div class="stat">
                         <span>Kills:</span>
                         <span id="kills">0</span>
                     </div>
-
-
                     <div class="stat">
                         <span>Depth:</span>
+
                         <span id="depth">1</span>
                     </div>
+
+
                 </div>
                 
-
-
                 <div class="panel">
-                    <h2>MESSAGE LOG</h2>
+                    <h2> MESSAGE LOG</h2>
                     <div id="messageLog"></div>
                 </div>
                 
                 <div class="panel">
+
                     <h2>CONTROLS</h2>
                     <div id="controls">
                         <kbd>↑↓←→</kbd> Move<br>
                         <kbd>Space</kbd> Wait<br>
-
                         <kbd>R</kbd> New Game<br><br>
-
-
                         <div class="legend">
+
+
                             <div class="legend-item">
                                 <span class="legend-char" style="color: #ff0;">@</span>
                                 <span>You</span>
@@ -316,21 +323,24 @@
                                 <span class="legend-char" style="color: #f00;">G</span>
                                 <span>Goblin</span>
                             </div>
+
                             <div class="legend-item">
                                 <span class="legend-char" style="color: #f0f;">O</span>
                                 <span>Orc</span>
                             </div>
+
+
+
                             <div class="legend-item">
                                 <span class="legend-char" style="color: #0a0;">T</span>
-                                <span>Troll</span>
+                                <span>Troll (Deadly!)</span>
                             </div>
-                            
+
+
                             <div class="legend-item">
                                 <span class="legend-char" style="color: #0ff;">!</span>
                                 <span>Health Potion</span>
                             </div>
-
-
                             <div class="legend-item">
                                 <span class="legend-char" style="color: #ff0;">></span>
                                 <span>Stairs (Exit)</span>
@@ -341,23 +351,28 @@
                 </div>
             </div>
         </div>
+
     </div>
     
     <div id="gameOver">
         <h2 id="gameOverTitle">GAME OVER</h2>
+
         <p id="gameOverText"></p>
         <button onclick="game.newGame()">Play Again</button>
     </div>
 
-
     <script>
+
+
         const TILE_SIZE = 12;
         const MAP_WIDTH = 60;
         const MAP_HEIGHT = 40;
         const FOV_RADIUS = 8;
-        
 
+        
+        //monsterss n surroundings
         const TILES = {
+
             FLOOR: '.',
             WALL: '#',
             PLAYER: '@',
@@ -365,40 +380,49 @@
             ORC: 'O',
             POTION: '!',
             STAIRS: '>'
+
         };
         
 
+        //colorsmonsters
         const COLORS = {
             floor: '#333',
             wall: '#666',
             player: '#ff0',
             goblin: '#f00',
-
             orc: '#f0f',
             troll: '#0a0',
+
             potion: '#0ff',
             stairs: '#ff0',
             fog: '#111',
             explored: '#222'
         };
+
+
+
         
         class Game {
             constructor() {
                 this.canvas = document.getElementById('gameCanvas');
-                this.ctx = this.canvas.getContext('2d');
 
+                this.ctx = this.canvas.getContext('2d');
                 this.canvas.width = MAP_WIDTH * TILE_SIZE;
                 this.canvas.height = MAP_HEIGHT * TILE_SIZE;
                 
                 this.messageLog = [];
                 this.newGame();
-                this.setupInput();
 
+                this.setupInput();
                 this.render();
+
             }
+
+            //game after slain
             
             newGame() {
                 this.map = this.generateDungeon();
+
                 this.explored = Array(MAP_HEIGHT).fill().map(() => Array(MAP_WIDTH).fill(false));
 
                 this.visible = Array(MAP_HEIGHT).fill().map(() => Array(MAP_WIDTH).fill(false));
@@ -406,61 +430,75 @@
                 const startRoom = this.rooms[0];
                 this.player = {
                     x: startRoom.centerX,
+
                     y: startRoom.centerY,
                     hp: 120,
                     maxHp: 120,
-
                     attack: 8,
+
                     defense: 4,
                     level: 1,
                     kills: 0
                 };
                 
+
+
                 this.depth = 1;
                 this.entities = [];
                 this.items = [];
+
                 this.gameOverFlag = false;
                 
-           
-
+                
 
                 const lastRoom = this.rooms[this.rooms.length - 1];
                 this.stairs = { x: lastRoom.centerX, y: lastRoom.centerY };
                 
-              
-
+                
+                //
                 this.spawnEntities();
                 
                 this.messageLog = [];
-                this.addMessage('Welcome to the dungeon! Find the stairs to descend deeper...', 'info');
+                this.addMessage('Welcome to the dungeons! Find the stairs to descend deeper...', 'info');
                 
                 document.getElementById('gameOver').className = '';
+
                 this.updateUI();
                 this.calculateFOV();
                 this.render();
+
             }
             
             generateDungeon() {
+
+
                 const map = Array(MAP_HEIGHT).fill().map(() => Array(MAP_WIDTH).fill('#'));
+
                 this.rooms = [];
                 
                 const NUM_ROOMS = 8 + Math.floor(Math.random() * 5);
+
                 
                 for (let i = 0; i < NUM_ROOMS; i++) {
                     const w = 5 + Math.floor(Math.random() * 8);
+
                     const h = 4 + Math.floor(Math.random() * 6);
+
                     const x = Math.floor(Math.random() * (MAP_WIDTH - w - 2)) + 1;
+
                     const y = Math.floor(Math.random() * (MAP_HEIGHT - h - 2)) + 1;
                     
                     const newRoom = {
                         x, y, w, h,
                         centerX: Math.floor(x + w / 2),
+
                         centerY: Math.floor(y + h / 2)
                     };
                     
                     let overlap = false;
                     for (let room of this.rooms) {
                         if (this.roomsOverlap(newRoom, room)) {
+
                             overlap = true;
                             break;
                         }
@@ -471,29 +509,40 @@
                         
                         if (this.rooms.length > 0) {
                             const prevRoom = this.rooms[this.rooms.length - 1];
+
                             this.carveCorridor(map, prevRoom.centerX, prevRoom.centerY, 
+
                                              newRoom.centerX, newRoom.centerY);
                         }
                         
                         this.rooms.push(newRoom);
+
                     }
                 }
                 
                 return map;
+
             }
+
             
             roomsOverlap(room1, room2) {
                 return !(room1.x + room1.w < room2.x - 1 || 
+
                         room1.x > room2.x + room2.w + 1 ||
+
+
                         room1.y + room1.h < room2.y - 1 || 
                         room1.y > room2.y + room2.h + 1);
             }
             
             carveRoom(map, room) {
+
                 for (let y = room.y; y < room.y + room.h; y++) {
                     for (let x = room.x; x < room.x + room.w; x++) {
                         if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) {
+
                             map[y][x] = '.';
+
                         }
                     }
                 }
@@ -501,27 +550,34 @@
             
             carveCorridor(map, x1, y1, x2, y2) {
                 if (Math.random() < 0.5) {
-                  
+                   
+
 
                     for (let x = Math.min(x1, x2); x <= Math.max(x1, x2); x++) {
+
                         if (x >= 0 && x < MAP_WIDTH && y1 >= 0 && y1 < MAP_HEIGHT) {
                             map[y1][x] = '.';
                         }
                     }
                     for (let y = Math.min(y1, y2); y <= Math.max(y1, y2); y++) {
+
+
                         if (x2 >= 0 && x2 < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) {
                             map[y][x2] = '.';
                         }
                     }
                 } else {
-                  
+                    
+
 
                     for (let y = Math.min(y1, y2); y <= Math.max(y1, y2); y++) {
+
                         if (x1 >= 0 && x1 < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT) {
                             map[y][x1] = '.';
                         }
                     }
                     for (let x = Math.min(x1, x2); x <= Math.max(x1, x2); x++) {
+
                         if (x >= 0 && x < MAP_WIDTH && y2 >= 0 && y2 < MAP_HEIGHT) {
                             map[y2][x] = '.';
                         }
@@ -540,59 +596,61 @@
                     
                     do {
                         x = room.x + Math.floor(Math.random() * room.w);
+
+
                         y = room.y + Math.floor(Math.random() * room.h);
                         attempts++;
                     } while ((this.getEntityAt(x, y) || (x === this.player.x && y === this.player.y)) && attempts < 50);
                     
-
                     if (attempts < 50) {
                         const roll = Math.random();
+
                         let type, char, color, hp, attack, defense;
                         
                         if (roll < 0.5) {
-                            // Goblin 
+                            // Goblin
+
 
                             type = 'goblin';
                             char = TILES.GOBLIN;
                             color = COLORS.goblin;
-
                             hp = 12 + this.depth * 5;
-                            attack = 4 + this.depth * 3;
-                            defense = 1 + Math.floor(this.depth / 3);
+                            attack = 4 + this.depth * 2;
+                            defense = 1 + Math.floor(this.depth * 0.5);
                         } else if (roll < 0.85) {
-                            // orc
-
+                            //orc
 
                             type = 'orc';
                             char = TILES.ORC;
                             color = COLORS.orc;
-                            hp = 25 + this.depth * 8;
-                            attack = 6 + this.depth * 4;
-                            defense = 3 + Math.floor(this.depth / 2);
-
-
+                            hp = 20 + this.depth * 7;
+                            attack = 6 + this.depth * 2.5;
+                            defense = 2 + Math.floor(this.depth * 0.7);
                         } else {
+
                             //troll
                             type = 'troll';
                             char = 'T';
                             color = '#0a0';
-                            hp = 40 + this.depth * 12;
-                            attack = 8 + this.depth * 5;
-                            defense = 4 + Math.floor(this.depth / 2);
+                            hp = 35 + this.depth * 10;
+                            attack = 8 + this.depth * 3;
+                            defense = 3 + this.depth;
                         }
                         
                         this.entities.push({
                             x, y, type, char, color,
-
                             hp: Math.floor(hp),
                             maxHp: Math.floor(hp),
                             attack: Math.floor(attack),
+
                             defense
                         });
                     }
+
                 }
                 
                 for (let i = 0; i < numPotions; i++) {
+
                     const room = this.rooms[1 + Math.floor(Math.random() * (this.rooms.length - 1))];
                     let x, y, attempts = 0;
                     
@@ -602,56 +660,67 @@
                         y = room.y + Math.floor(Math.random() * room.h);
                         attempts++;
                     } while ((this.getEntityAt(x, y) || this.getItemAt(x, y) || 
+
                              (x === this.player.x && y === this.player.y)) && attempts < 50);
                     
                     if (attempts < 50) {
                         this.items.push({
                             x, y,
                             type: 'potion',
-
                             char: TILES.POTION,
                             color: COLORS.potion,
                             heal: 30 + Math.floor(Math.random() * 20)
+
                         });
+
                     }
+
                 }
             }
             
             setupInput() {
                 document.addEventListener('keydown', (e) => {
 
+
                     if (this.gameOverFlag) return;
+
                     
                     let moved = false;
                     
                     switch(e.key) {
                         case 'ArrowUp':
-                            moved = this.movePlayer(0, -1);
 
+                            moved = this.movePlayer(0, -1);
                             e.preventDefault();
                             break;
+
                         case 'ArrowDown':
                             moved = this.movePlayer(0, 1);
                             e.preventDefault();
                             break;
+
                         case 'ArrowLeft':
+
                             moved = this.movePlayer(-1, 0);
                             e.preventDefault();
 
                             break;
                         case 'ArrowRight':
                             moved = this.movePlayer(1, 0);
+
                             e.preventDefault();
+
+
                             break;
                         case ' ':
                             moved = true;
                             e.preventDefault();
                             break;
-
                         case 'r':
                         case 'R':
                             this.newGame();
                             return;
+
                     }
                     
                     if (moved) {
@@ -660,11 +729,13 @@
 
                         this.updateUI();
                         this.render();
+
                     }
                 });
             }
             
             movePlayer(dx, dy) {
+
                 const newX = this.player.x + dx;
 
                 const newY = this.player.y + dy;
@@ -672,22 +743,25 @@
                 if (!this.isWalkable(newX, newY)) return false;
                 
                 const enemy = this.getEntityAt(newX, newY);
-                if (enemy) {
 
+                if (enemy) {
                     this.combat(this.player, enemy);
                     return true;
+
                 }
                 
                 this.player.x = newX;
-
                 this.player.y = newY;
                 
                 const item = this.getItemAt(newX, newY);
                 if (item) {
                     this.pickupItem(item);
+
                 }
+
                 
                 if (newX === this.stairs.x && newY === this.stairs.y) {
+
                     this.descendStairs();
                 }
                 
@@ -695,20 +769,27 @@
             }
             
             combat(attacker, defender) {
+               
+
+                let baseDamage = attacker.attack - defender.defense;
+
+                const variance = Math.floor(Math.random() * 6) - 2; 
+
+         
+
+
+                if (attacker !== this.player) {
+                    baseDamage = Math.max(baseDamage, Math.floor(attacker.attack * 0.15));
+                }
                 
-
-
-                const baseDamage = attacker.attack - defender.defense;
-                const variance = Math.floor(Math.random() * 6) - 2; // -2 to +3
                 const damage = Math.max(1, baseDamage + variance);
                 defender.hp -= damage;
                 
                 const attackerName = attacker === this.player ? 'You' : `The ${attacker.type}`;
                 const defenderName = defender === this.player ? 'you' : `the ${defender.type}`;
                 
-                // add direction anindicator for enmy attacks
+                
                 if (attacker !== this.player) {
-
                     const dx = attacker.x - this.player.x;
                     const dy = attacker.y - this.player.y;
                     let direction = '';
@@ -716,11 +797,12 @@
                     if (dy < 0 && dx === 0) direction = ' from above';
                     else if (dy > 0 && dx === 0) direction = ' from below';
                     else if (dx < 0 && dy === 0) direction = ' from the left';
+
                     else if (dx > 0 && dy === 0) direction = ' from the right';
-
-
                     else if (dy < 0 && dx < 0) direction = ' from above-left';
+
                     else if (dy < 0 && dx > 0) direction = ' from above-right';
+
                     else if (dy > 0 && dx < 0) direction = ' from below-left';
                     else if (dy > 0 && dx > 0) direction = ' from below-right';
                     
@@ -728,24 +810,25 @@
                 } else {
                     this.addMessage(`${attackerName} hit ${defenderName} for ${damage} damage!`, 'damage');
                 }
-
-
                 
                 if (defender.hp <= 0) {
                     if (defender === this.player) {
+
                         this.gameOver(false);
                     } else {
                         this.addMessage(`${attackerName} killed ${defenderName}!`, 'death');
                         this.entities = this.entities.filter(e => e !== defender);
                         this.player.kills++;
                         
-                        
+                      
 
 
                         if (this.player.kills % 5 === 0) {
                             this.player.level++;
-                            this.player.attack += 3 + Math.floor(this.player.level / 3);
-                            this.player.defense += 2;
+                            this.player.attack += 3;
+
+                            this.player.defense += 1;
+
                             this.player.maxHp += 25;
                             this.player.hp = this.player.maxHp;
                             this.addMessage(`Level up! You are now level ${this.player.level}!`, 'heal');
@@ -755,49 +838,62 @@
             }
             
             enemyTurn() {
-            
+                
+
                 const sortedEnemies = [...this.entities].sort((a, b) => {
                     const distA = Math.abs(a.x - this.player.x) + Math.abs(a.y - this.player.y);
+
                     const distB = Math.abs(b.x - this.player.x) + Math.abs(b.y - this.player.y);
                     return distA - distB;
                 });
                 
                 for (let enemy of sortedEnemies) {
-                    
+                
+
+
                     const dx = this.player.x - enemy.x;
                     const dy = this.player.y - enemy.y;
                     const distX = Math.abs(dx);
                     const distY = Math.abs(dy);
                     const isAdjacent = distX <= 1 && distY <= 1 && (distX + distY > 0);
-                    
-                    
+                
                     const dist = Math.abs(enemy.x - this.player.x) + Math.abs(enemy.y - this.player.y);
                     
                     if (isAdjacent) {
-                        
+                    
+
                         this.combat(enemy, this.player);
                     } else if (dist < FOV_RADIUS + 3) {
-                    
+                        
+
+
                         let moveX = 0, moveY = 0;
                         
                         if (this.player.x > enemy.x) moveX = 1;
                         else if (this.player.x < enemy.x) moveX = -1;
+
                         
                         if (this.player.y > enemy.y) moveY = 1;
                         else if (this.player.y < enemy.y) moveY = -1;
                         
-                        
+                       
                         const tryMoves = [
-                            {x: moveX, y: moveY},  
+                            {x: moveX, y: moveY}, 
+
                             {x: moveX, y: 0},      
-                            {x: 0, y: moveY},     
+                            {x: 0, y: moveY},      
+
                             {x: moveX, y: -moveY}, 
                             {x: -moveX, y: moveY}  
                         ];
                         
                         let moved = false;
+
                         for (let move of tryMoves) {
+
                             const newX = enemy.x + move.x;
+
+
                             const newY = enemy.y + move.y;
                             
                             if (this.isWalkable(newX, newY) && !this.getEntityAt(newX, newY)) {
@@ -805,18 +901,16 @@
                                 enemy.y = newY;
                                 moved = true;
                                 break;
+                                
                             }
                         }
                         
-                     
-
-
-
+                        // monster movments
                         if (!moved && Math.random() < 0.3) {
                             const randomMoves = [
                                 {x: 1, y: 0}, {x: -1, y: 0},
-                                {x: 0, y: 1}, {x: 0, y: -1}
 
+                                {x: 0, y: 1}, {x: 0, y: -1}
                             ];
                             const randomMove = randomMoves[Math.floor(Math.random() * randomMoves.length)];
                             const newX = enemy.x + randomMove.x;
@@ -825,15 +919,16 @@
                             if (this.isWalkable(newX, newY) && !this.getEntityAt(newX, newY)) {
                                 enemy.x = newX;
                                 enemy.y = newY;
+
                             }
                         }
-
                     }
                 }
             }
             
             pickupItem(item) {
                 if (item.type === 'potion') {
+
                     const healed = Math.min(item.heal, this.player.maxHp - this.player.hp);
                     this.player.hp += healed;
 
@@ -844,16 +939,17 @@
             
             descendStairs() {
 
+
                 this.depth++;
                 this.addMessage(`You descend to depth ${this.depth}...`, 'info');
                 
                 if (this.depth >= 10) {
+
                     this.gameOver(true);
                     return;
                 }
                 
-             
-
+                // generate anew level
                 this.map = this.generateDungeon();
                 this.explored = Array(MAP_HEIGHT).fill().map(() => Array(MAP_WIDTH).fill(false));
                 
@@ -864,20 +960,20 @@
                 
                 const lastRoom = this.rooms[this.rooms.length - 1];
                 this.stairs = { x: lastRoom.centerX, y: lastRoom.centerY };
-
                 
                 this.entities = [];
                 this.items = [];
-
                 this.spawnEntities();
             }
-
-
             
             calculateFOV() {
+
                 this.visible = Array(MAP_HEIGHT).fill().map(() => Array(MAP_WIDTH).fill(false));
                 
+
                 for (let y = this.player.y - FOV_RADIUS; y <= this.player.y + FOV_RADIUS; y++) {
+
+
                     for (let x = this.player.x - FOV_RADIUS; x <= this.player.x + FOV_RADIUS; x++) {
                         if (x < 0 || x >= MAP_WIDTH || y < 0 || y >= MAP_HEIGHT) continue;
                         
@@ -890,11 +986,10 @@
                         }
                     }
                 }
-
             }
-
-
             
+
+
             hasLineOfSight(x0, y0, x1, y1) {
                 const dx = Math.abs(x1 - x0);
                 const dy = Math.abs(y1 - y0);
@@ -902,7 +997,6 @@
                 const sy = y0 < y1 ? 1 : -1;
                 let err = dx - dy;
                 
-
                 let x = x0, y = y0;
                 
                 while (true) {
@@ -915,7 +1009,6 @@
                         x += sx;
                     }
 
-
                     if (e2 < dx) {
                         err += dx;
                         y += sy;
@@ -924,8 +1017,6 @@
             }
 
             
-
-
             isWalkable(x, y) {
                 if (x < 0 || x >= MAP_WIDTH || y < 0 || y >= MAP_HEIGHT) return false;
                 return this.map[y][x] === '.';
@@ -946,35 +1037,36 @@
                 const logDiv = document.getElementById('messageLog');
                 const messageDiv = document.createElement('div');
                 messageDiv.className = `message ${type}`;
+
                 messageDiv.textContent = text;
                 logDiv.appendChild(messageDiv);
                 logDiv.scrollTop = logDiv.scrollHeight;
             }
             
-
-
             updateUI() {
                 document.getElementById('level').textContent = this.player.level;
                 document.getElementById('attack').textContent = this.player.attack;
                 document.getElementById('defense').textContent = this.player.defense;
+
                 document.getElementById('kills').textContent = this.player.kills;
                 document.getElementById('depth').textContent = this.depth;
                 
                 const hpPercent = (this.player.hp / this.player.maxHp) * 100;
+
                 document.getElementById('hpBar').style.width = hpPercent + '%';
                 document.getElementById('hpText').textContent = `${this.player.hp}/${this.player.maxHp}`;
             }
             
-
-
             gameOver(won) {
                 this.gameOverFlag = true;
                 const gameOverDiv = document.getElementById('gameOver');
+
                 const titleDiv = document.getElementById('gameOverTitle');
                 const textDiv = document.getElementById('gameOverText');
                 
                 if (won) {
                     gameOverDiv.className = 'show win';
+
                     titleDiv.textContent = 'VICTORY!';
                     textDiv.innerHTML = `You escaped the dungeon!<br>
                                         Final Level: ${this.player.level}<br>
@@ -983,6 +1075,7 @@
                 } else {
                     gameOverDiv.className = 'show';
                     titleDiv.textContent = 'YOU DIED';
+
                     textDiv.innerHTML = `You were slain in the dungeon...<br>
                                         Final Level: ${this.player.level}<br>
                                         Kills: ${this.player.kills}<br>
@@ -991,23 +1084,26 @@
             }
 
 
-
             
+
+
             render() {
                 this.ctx.fillStyle = '#000';
                 this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
                 this.ctx.font = `${TILE_SIZE}px "Courier New"`;
                 this.ctx.textAlign = 'center';
                 this.ctx.textBaseline = 'middle';
-       
-
+                
+               
                 for (let y = 0; y < MAP_HEIGHT; y++) {
+
                     for (let x = 0; x < MAP_WIDTH; x++) {
                         const tile = this.map[y][x];
                         const px = x * TILE_SIZE + TILE_SIZE / 2;
                         const py = y * TILE_SIZE + TILE_SIZE / 2;
                         
                         if (this.visible[y][x]) {
+
                             this.ctx.fillStyle = tile === '#' ? COLORS.wall : COLORS.floor;
                             this.ctx.fillText(tile, px, py);
                         } else if (this.explored[y][x]) {
@@ -1016,19 +1112,17 @@
                         }
                     }
                 }
-              
-
-
+                
+                
                 if (this.visible[this.stairs.y][this.stairs.x]) {
+
                     const px = this.stairs.x * TILE_SIZE + TILE_SIZE / 2;
                     const py = this.stairs.y * TILE_SIZE + TILE_SIZE / 2;
                     this.ctx.fillStyle = COLORS.stairs;
                     this.ctx.fillText(TILES.STAIRS, px, py);
                 }
                 
-                // render items\
-
-
+                //render items
                 for (let item of this.items) {
                     if (this.visible[item.y][item.x]) {
                         const px = item.x * TILE_SIZE + TILE_SIZE / 2;
@@ -1039,8 +1133,6 @@
                 }
                 
                 //render
-
-
                 for (let entity of this.entities) {
                     if (this.visible[entity.y][entity.x]) {
                         const px = entity.x * TILE_SIZE + TILE_SIZE / 2;
@@ -1050,15 +1142,19 @@
                     }
                 }
                 
-                
+        
+
 
                 const px = this.player.x * TILE_SIZE + TILE_SIZE / 2;
+
                 const py = this.player.y * TILE_SIZE + TILE_SIZE / 2;
                 this.ctx.fillStyle = COLORS.player;
                 this.ctx.fillText(TILES.PLAYER, px, py);
             }
         }
         
+
+
         const game = new Game();
     </script>
 </body>
